@@ -16,6 +16,7 @@ class AppController extends AbstractController
      */
     public function index(string  $name)
     {
-        return $this->render('base.html.twig');
+        $users = ['ramy' , 'tamer' , 'mona','ahmed','ayat'];
+        return $this->render('base.html.twig',['users' => $users]);
     }
 }
