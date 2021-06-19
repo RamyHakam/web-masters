@@ -6,12 +6,17 @@
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+            <!--Custom styles-->
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
 
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
 
         {% block javascripts %}
-
+            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
     </head>
@@ -20,9 +25,9 @@
         <h1> Welcome to our Symfony 5 course ya</h1>
             <ul>
                 {% for user in users %}
-                <i>
+                <li>
                 {{ user }}
-                </i>
+                </li>
                 {% endfor %}
 
             </ul>

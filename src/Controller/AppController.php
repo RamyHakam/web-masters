@@ -11,12 +11,30 @@ use Symfony\Component\Routing\Annotation\Route;
 class AppController extends AbstractController
 {
     /**
-     * @Route("/{name}")
+     * @Route("/signin_user",name="signin_page")
      * @return Response
      */
-    public function index(string  $name)
+    public function index()
     {
-        $users = ['ramy' , 'tamer' , 'mona','ahmed','ayat'];
-        return $this->render('base.html.twig',['users' => $users]);
+
+        return $this->render('home.html.twig',['user' => 'test']);
+    }
+
+    /**
+     * @Route("/signup",name="signup_page")
+     * @return Response
+     */
+    public function signUp()
+    {
+       return $this->render('signup.html.twig');
+    }
+
+    /**
+     * @Route("/post/{name}",name="user_post")
+     * @return Response
+     */
+    public function post(string  $name)
+    {
+      return  $this->render('post.html.twig',['name' => $name]);
     }
 }
