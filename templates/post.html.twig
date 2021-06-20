@@ -4,8 +4,13 @@
     {{ parent() }}
     <link href="https://fonts.googleapis.com/css?family=Rokkitt" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/post.css') }}">
+    {{ encore_entry_link_tags('post') }}
 
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('post') }}
 {% endblock %}
 {% block body %}
     <section class="hero">
