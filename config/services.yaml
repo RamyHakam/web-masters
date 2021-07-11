@@ -21,5 +21,30 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 
+    App\Service\FirstService:
+        class: App\Service\FirstClassService
+        tags: ['app.RESHA']
+
+    App\Service\SecondService:
+        class: App\Service\SecondService
+        tags: ['app.RESHA']
+
+    App\Service\ThirdService:
+        class: App\Service\ThirdService
+        tags: ['app.RESHA']
+
+    App\Factory\CustomServiceFactory: ~
+
+    App\Service\CustomService:
+        class: App\Service\CustomService
+        factory: ['@App\Factory\CustomServiceFactory','CreateNewCustomService']
+        arguments: ['@logger']
+
+    App\Service\RandomNumberService:
+        arguments:
+            $isDebug: "%kernel.debug%"
+
+
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

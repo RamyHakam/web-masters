@@ -4,6 +4,12 @@
 namespace App\Controller;
 
 
+use App\Service\CustomService;
+use App\Service\FirstClassService;
+use App\Service\FirstService;
+use App\Service\RandomNumberService;
+use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,9 +20,10 @@ class AppController extends AbstractController
      * @Route("/signin_user",name="signin_page")
      * @return Response
      */
-    public function index()
+    public function index(RandomNumberService $numberService)
     {
-
+        dd($numberService);
+        $number = $numberService->getRandomNumber(1000, 100000);
         return $this->render('home.html.twig',['user' => 'test']);
     }
 
