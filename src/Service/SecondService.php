@@ -4,7 +4,11 @@
 namespace App\Service;
 
 
-class SecondService
+class SecondService implements CommonInterface
 {
 
+    public function handle()
+    {
+        return 'Second';
+    }
 }

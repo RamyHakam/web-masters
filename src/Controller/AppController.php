@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Service\CommonInterface;
 use App\Service\CustomService;
 use App\Service\FirstClassService;
 use App\Service\FirstService;
@@ -20,9 +21,9 @@ class AppController extends AbstractController
      * @Route("/signin_user",name="signin_page")
      * @return Response
      */
-    public function index(RandomNumberService $numberService)
+    public function index(CommonInterface $second)
     {
-        dd($numberService);
+        dd($second);
         $number = $numberService->getRandomNumber(1000, 100000);
         return $this->render('home.html.twig',['user' => 'test']);
     }

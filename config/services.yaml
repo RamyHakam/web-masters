@@ -21,13 +21,12 @@ services:
             - '../src/Kernel.php'
             - '../src/Tests/'
 
-    App\Service\FirstService:
-        class: App\Service\FirstClassService
-        tags: ['app.RESHA']
+    App\Service\CommonInterface: '@App\Service\FirstService'
 
-    App\Service\SecondService:
-        class: App\Service\SecondService
-        tags: ['app.RESHA']
+    App\Service\CommonInterface $second: '@App\Service\SecondService'
+
+
+
 
     App\Service\ThirdService:
         class: App\Service\ThirdService
