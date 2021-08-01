@@ -21,9 +21,9 @@ class AppController extends AbstractController
      * @Route("/signin_user",name="signin_page")
      * @return Response
      */
-    public function index(CommonInterface $second)
+    public function index(RandomNumberService  $number)
     {
-        dd($second);
+        dd($number);
         $number = $numberService->getRandomNumber(1000, 100000);
         return $this->render('home.html.twig',['user' => 'test']);
     }
