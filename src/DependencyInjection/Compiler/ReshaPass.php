@@ -14,7 +14,6 @@ class ReshaPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $container->getDefinition(RandomNumberService::class)->setPublic(true);
 
         $firstClassService = $container->findDefinition(FirstClassService::class);
 

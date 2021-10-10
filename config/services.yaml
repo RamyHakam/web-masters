@@ -36,6 +36,7 @@ services:
         class: App\Service\CustomService
         factory: ['@App\Factory\CustomServiceFactory','CreateNewCustomService']
         arguments: ['@logger']
+        public: true
 
 
 

@@ -19,8 +19,9 @@ class CustomService
         $this->logger = $logger;
     }
 
-    public function getSomeDate()
+    public function getSomeData()
     {
+        return " work !!";
         $this->logger->info("create a new custom service from factory");
         return true;
     }

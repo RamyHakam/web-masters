@@ -17,13 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AppController extends AbstractController
 {
+
+
     /**
      * @Route("/signin_user",name="signin_page")
      * @return Response
      */
-    public function index(RandomNumberService  $number)
+    public function index(RandomNumberService  $number,CustomService  $custom)
     {
-        dd($number);
+
+        dd($custom->getSomeData());
         $number = $numberService->getRandomNumber(1000, 100000);
         return $this->render('home.html.twig',['user' => 'test']);
     }
