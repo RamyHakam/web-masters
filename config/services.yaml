@@ -38,6 +38,11 @@ services:
         arguments: ['@logger']
         public: true
 
+    App\Service\HeavyService:
+           class: App\Service\HeavyService
+           lazy: true
+
+
 
 
     # add more service definitions when explicit configuration is needed

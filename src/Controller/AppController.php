@@ -8,6 +8,7 @@ use App\Service\CommonInterface;
 use App\Service\CustomService;
 use App\Service\FirstClassService;
 use App\Service\FirstService;
+use App\Service\HeavyService;
 use App\Service\RandomNumberService;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
@@ -18,6 +19,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class AppController extends AbstractController
 {
 
+    /**
+     * @var HeavyService
+     */
+    private $heavyService;
+
+    public function __construct(HeavyService $heavyService)
+    {
+        $this->heavyService = $heavyService;
+    }
+
 
     /**
      * @Route("/signin_user",name="signin_page")
@@ -26,7 +37,7 @@ class AppController extends AbstractController
     public function index(RandomNumberService  $number,CustomService  $custom)
     {
 
-        dd($custom->getSomeData());
+        dd($this->heavyService->heavyCode());
         $number = $numberService->getRandomNumber(1000, 100000);
         return $this->render('home.html.twig',['user' => 'test']);
     }
