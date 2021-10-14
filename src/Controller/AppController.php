@@ -6,10 +6,13 @@ namespace App\Controller;
 
 use App\Service\CommonInterface;
 use App\Service\CustomService;
+use App\Service\FirstActionService;
 use App\Service\FirstClassService;
 use App\Service\FirstService;
 use App\Service\HeavyService;
+use App\Service\MyOwnServiceLocator;
 use App\Service\RandomNumberService;
+use App\Service\SecondActionService;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,14 +22,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class AppController extends AbstractController
 {
 
-    /**
-     * @var HeavyService
-     */
-    private $heavyService;
 
-    public function __construct(HeavyService $heavyService)
+    /**
+     * @var MyOwnServiceLocator
+     */
+    private $serviceLocator;
+
+    public function __construct(MyOwnServiceLocator $serviceLocator)
     {
-        $this->heavyService = $heavyService;
+
+        $this->serviceLocator = $serviceLocator;
     }
 
 
@@ -37,7 +42,7 @@ class AppController extends AbstractController
     public function index(RandomNumberService  $number,CustomService  $custom)
     {
 
-        dd($this->heavyService->heavyCode());
+        dd(get_class($this->serviceLocator->getAction(SecondActionService::class)));
         $number = $numberService->getRandomNumber(1000, 100000);
         return $this->render('home.html.twig',['user' => 'test']);
     }
