@@ -2,32 +2,27 @@
 
 namespace App\Service;
 
+use App\Traits\FirstActionAware;
+use App\Traits\SecondActionAware;
+use App\Traits\ThirdActionAware;
 use Psr\Container\ContainerInterface;
 use Symfony\Contracts\Service\ServiceSubscriberInterface;
+use Symfony\Contracts\Service\ServiceSubscriberTrait;
 
 class MyOwnServiceLocator implements ServiceSubscriberInterface
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $locator;
+    use ServiceSubscriberTrait ,FirstActionAware,SecondActionAware,ThirdActionAware;
 
-    public function __construct(ContainerInterface $locator)
+    public function doAction(string $name)
     {
-        $this->locator = $locator;
-    }
-
-    public static function getSubscribedServices()
-    {
-       return  [
-            FirstActionService::class,
-           SecondActionService::class,
-           ThirdActionService::class
-        ];
-    }
-
-    public function getAction(string $name)
-    {
-       return $this->locator->has($name)? $this->locator->get($name): null;
+        switch ($name)
+        {
+            case FirstActionService::class:
+                return $this->firstAction();
+            case SecondActionService::class:
+                return $this->secondAction();
+            case ThirdActionService::class:
+                return $this->thirdAction();
+        }
     }
 }

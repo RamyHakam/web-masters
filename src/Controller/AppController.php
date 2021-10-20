@@ -13,6 +13,7 @@ use App\Service\HeavyService;
 use App\Service\MyOwnServiceLocator;
 use App\Service\RandomNumberService;
 use App\Service\SecondActionService;
+use App\Service\ThirdActionService;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,7 +43,7 @@ class AppController extends AbstractController
     public function index(RandomNumberService  $number,CustomService  $custom)
     {
 
-        dd(get_class($this->serviceLocator->getAction(SecondActionService::class)));
+        dd(get_class($this->serviceLocator->doAction(ThirdActionService::class)));
         $number = $numberService->getRandomNumber(1000, 100000);
         return $this->render('home.html.twig',['user' => 'test']);
     }
