@@ -1,0 +1,35 @@
+{% macro user(userData) %}
+    <tr>
+        <td class="pl-4">1</td>
+        <td>
+            <h5 class="font-medium mb-0">{{ userData.name }}</h5>
+            <span class="text-muted">{{ userData.address}}</span>
+        </td>
+        <td>
+            <span class="text-muted">{{ userData.title }}</span><br>
+            <span class="text-muted">{{ userData.post }}</span>
+        </td>
+        <td>
+            <span class="text-muted">{{ userData.email }}</span><br>
+            <span class="text-muted">{{ userData.phone }}</span>
+        </td>
+        <td>
+            <span class="text-muted">{{ userData.birth }}</span><br>
+            <span class="text-muted">{{ userData.createdAt }}</span>
+        </td>
+        <td>
+            <select class="form-control category-select" id="exampleFormControlSelect1">
+                <option>Modulator</option>
+                <option>Admin</option>
+                <option>User</option>
+                <option>Subscriber</option>
+            </select>
+        </td>
+        <td>
+            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
+            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
+            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
+            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
+        </td>
+    </tr>
+{% endmacro %}

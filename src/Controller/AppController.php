@@ -77,20 +77,14 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/newUser/{name}",name="new_user")
+     * @Route("/list/",name="list_users")
      * @return Response
      */
-    public function newUser(string  $name)
+    public function newUser()
     {
-        $user = new User();
-        $user->setName($name)
-            ->setEmail('test@tesrt.com')
-            ->setPhone('+49049405')
-            ->setAddress('40 elharm ')
-            ->setActive(true);
-
-        $this->entityManager->flush();    //git push
-        return  new Response('welcome to doctrine!');
+        $repository = $this->entityManager->getRepository(User::class);
+        $users = $repository->findAll();
+        return  $this->render('List.html.twig',['users' => $users]);
     }
 
     /**

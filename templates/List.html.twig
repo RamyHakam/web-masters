@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% import 'user.html.twig' as userView %}
+
+{% block title %}
+    Home page
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-uppercase mb-0">Manage Users</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table no-wrap user-table mb-0">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
+                                <th scope="col" class="border-0 text-uppercase font-medium">Name</th>
+                                <th scope="col" class="border-0 text-uppercase font-medium">Occupation</th>
+                                <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
+                                <th scope="col" class="border-0 text-uppercase font-medium">Added</th>
+                                <th scope="col" class="border-0 text-uppercase font-medium">Category</th>
+                                <th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                         {% for user in users %}
+                              {{ userView.user(user) }}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
