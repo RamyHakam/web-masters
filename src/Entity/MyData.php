@@ -28,7 +28,7 @@ class MyData
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
+     * @ORM\Column(type="text", length=125, nullable=true)
      */
     private $lastName;
 
