@@ -42,6 +42,25 @@ class User
      */
     private $active;
 
+    /**
+     * @ORM\Column(type="string",nullable=false)
+     */
+    private $title;
+    /**
+     * @ORM\Column(type="string",nullable=true)
+     */
+    private $past;
+
+    /**
+     * @ORM\Column(type="date",nullable=false)
+     */
+    private $dateOfBirth;
+
+    /**
+     * @ORM\Column(type="datetime",nullable=false)
+     */
+    private $createdAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +123,78 @@ class User
     {
         $this->active = $active;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     * @return User
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPast()
+    {
+        return $this->past;
+    }
+
+    /**
+     * @param mixed $past
+     * @return User
+     */
+    public function setPast($past)
+    {
+        $this->past = $past;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateOfBirth()
+    {
+        return $this->dateOfBirth;
+    }
+
+    /**
+     * @param mixed $dateOfBirth
+     * @return User
+     */
+    public function setDateOfBirth($dateOfBirth)
+    {
+        $this->dateOfBirth = $dateOfBirth;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdAt
+     * @return User
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
         return $this;
     }
 }
