@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\User;
 use App\Service\CommonInterface;
 use App\Service\CustomService;
 use App\Service\FirstActionService;
@@ -14,6 +15,7 @@ use App\Service\MyOwnServiceLocator;
 use App\Service\RandomNumberService;
 use App\Service\SecondActionService;
 use App\Service\ThirdActionService;
+use Doctrine\ORM\EntityManagerInterface;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -64,5 +66,23 @@ class AppController extends AbstractController
     public function post(string  $name)
     {
       return  $this->render('post.html.twig',['name' => $name]);
+    }
+
+    /**
+     * @Route("/newUser/{name}",name="new_user")
+     * @return Response
+     */
+    public function newUser(string  $name,EntityManagerInterface  $entityManager)
+    {
+        $user = new User();
+        $user->setName($name)
+            ->setEmail('test@tesrt.com')
+            ->setPhone('+49049405')
+            ->setAddress('40 elharm ')
+            ->setActive(true);
+
+        $entityManager->persist($user);    //git commit
+        $entityManager->flush();    //git push
+        return  new Response('welcome to doctrine!');
     }
 }
