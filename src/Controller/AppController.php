@@ -85,4 +85,20 @@ class AppController extends AbstractController
         $entityManager->flush();    //git push
         return  new Response('welcome to doctrine!');
     }
+
+    /**
+     * @Route("/getUser/{name}",name="new_user")
+     * @return Response
+     */
+    public function getUser(string  $name,EntityManagerInterface  $entityManager)
+    {
+        $repository = $entityManager->getRepository(User::class);
+
+      $user =  $repository->findOneBy(['name' => $name]);
+
+        dd($user->getName());
+
+
+        return  new Response('welcome to doctrine!');
+    }
 }
