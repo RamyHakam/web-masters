@@ -23,7 +23,7 @@ class MyData
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=50,unique=true)
+     * @ORM\Column(type="string", length=230,unique=true)
      */
     private $email;
 
