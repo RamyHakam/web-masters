@@ -30,11 +30,16 @@ class AppController extends AbstractController
      * @var MyOwnServiceLocator
      */
     private $serviceLocator;
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
 
-    public function __construct(MyOwnServiceLocator $serviceLocator)
+    public function __construct(MyOwnServiceLocator $serviceLocator,EntityManagerInterface  $entityManager)
     {
 
         $this->serviceLocator = $serviceLocator;
+        $this->entityManager = $entityManager;
     }
 
 
@@ -65,14 +70,17 @@ class AppController extends AbstractController
      */
     public function post(string  $name)
     {
-      return  $this->render('post.html.twig',['name' => $name]);
+        $repository = $this->entityManager->getRepository(User::class);
+
+        $user =  $repository->findOneBy(['name' => $name]);
+      return  $this->render('post.html.twig',['user' => $user]);
     }
 
     /**
      * @Route("/newUser/{name}",name="new_user")
      * @return Response
      */
-    public function newUser(string  $name,EntityManagerInterface  $entityManager)
+    public function newUser(string  $name)
     {
         $user = new User();
         $user->setName($name)
@@ -81,8 +89,7 @@ class AppController extends AbstractController
             ->setAddress('40 elharm ')
             ->setActive(true);
 
-        $entityManager->persist($user);    //git commit
-        $entityManager->flush();    //git push
+        $this->entityManager->flush();    //git push
         return  new Response('welcome to doctrine!');
     }
 
@@ -90,9 +97,9 @@ class AppController extends AbstractController
      * @Route("/getUser/{name}",name="new_user")
      * @return Response
      */
-    public function getUser(string  $name,EntityManagerInterface  $entityManager)
+    public function getUserByName(string  $name)
     {
-        $repository = $entityManager->getRepository(User::class);
+        $repository = $this->entityManager->getRepository(User::class);
 
       $user =  $repository->findOneBy(['name' => $name]);
 
