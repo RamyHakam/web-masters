@@ -88,6 +88,17 @@ class AppController extends AbstractController
     }
 
     /**
+     * @Route("/search/{term}",name="search_users")
+     * @return Response
+     */
+    public function searchUser($term)
+    {
+        $repository = $this->entityManager->getRepository(User::class);
+        $users = $repository->findByTerm($term);
+        return  $this->render('List.html.twig',['users' => $users]);
+    }
+
+    /**
      * @Route("/getUser/{name}",name="new_user")
      * @return Response
      */
