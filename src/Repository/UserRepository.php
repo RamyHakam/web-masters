@@ -52,7 +52,7 @@ class UserRepository extends ServiceEntityRepository
     public function findByTerm($term)
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.title LIKE :term ')
+            ->andWhere('u.title LIKE :term  OR u.past LIKE :term and u.name LIKE :term')
             ->setParameter('term','%'.$term ."%")
             ->getQuery()
             ->getResult();
