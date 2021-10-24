@@ -83,7 +83,7 @@ class AppController extends AbstractController
     public function listUser()
     {
         $repository = $this->entityManager->getRepository(User::class);
-        $users = $repository->findByNotPast('Frontend');
+        $users = $repository->findByPastUsingMyDql('Frontend');
         return  $this->render('List.html.twig',['users' => $users]);
     }
 

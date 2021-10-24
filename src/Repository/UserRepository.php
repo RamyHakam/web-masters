@@ -31,6 +31,13 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findByPastUsingMyDql($value)
+    {
+        $dql = 'SELECT user FROM App\Entity\User user WHERE user.past != '. "'".$value."'";
+        $dql = $this->getEntityManager()->createQuery($dql);
+        return  $dql->execute();
+    }
+
     public function findByNotPast($value)
     {
         return $this->createQueryBuilder('u')
