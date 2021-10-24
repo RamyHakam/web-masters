@@ -77,10 +77,10 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/list/",name="list_users")
+     * @Route("/list",name="list_users")
      * @return Response
      */
-    public function newUser()
+    public function listUser()
     {
         $repository = $this->entityManager->getRepository(User::class);
         $users = $repository->findAll();
