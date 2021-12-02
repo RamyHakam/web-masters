@@ -65,14 +65,11 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/post/{name}",name="user_post")
+     * @Route("/post/{email}/{name}",name="user_post")
      * @return Response
      */
-    public function post(string  $name)
+    public function post(User $user)
     {
-        $repository = $this->entityManager->getRepository(User::class);
-
-        $user =  $repository->findOneBy(['name' => $name]);
       return  $this->render('post.html.twig',['user' => $user]);
     }
 
