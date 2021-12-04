@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\MyData;
 use App\Entity\User;
 use App\Service\CommonInterface;
 use App\Service\CustomService;
@@ -18,6 +19,8 @@ use App\Service\ThirdActionService;
 use Doctrine\ORM\EntityManagerInterface;
 use Monolog\Logger;
 use Psr\Log\LoggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -66,11 +69,13 @@ class AppController extends AbstractController
 
     /**
      * @Route("/post/{email}/{name}",name="user_post")
+     * @ParamConverter("user",options={"mapping":{"name":"name"}})
+     * @ParamConverter("data",options={"mapping":{"email":"email"}})
      * @return Response
      */
-    public function post(User $user)
+    public function post(User $user,MyData $data)
     {
-      return  $this->render('post.html.twig',['user' => $user]);
+      return  $this->render('post.html.twig',['user' => $user,'data' =>$data]);
     }
 
     /**
