@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Address;
 use App\Entity\MyData;
 use App\Entity\Post;
 use App\Entity\User;
@@ -155,4 +156,37 @@ class AppController extends AbstractController
 
         return  new Response('welcome to doctrine!');
     }
+
+    /**
+     * @Route("/addUserAndAddress/{name}",name="new_user_address")
+     * @return Response
+     */
+    public function addUserAndAddress(string  $name,EntityManagerInterface  $entityManager)
+    {
+        $user = new User();
+        $user->setEmail('tes2022@yahoo.com')
+            ->setName($name)
+            ->setActive(true)
+            ->setPhone('109304')
+            ->setCreatedAt(new \DateTime())
+            ->setDateOfBirth(new \DateTime())
+            ->setPast('LEAD')
+            ->setTitle('CEO');
+
+        $address = new Address();
+        $address->setUser($user)
+            ->setCity('Giza')
+            ->setStreet('40595')
+            ->setNumber(1);
+
+
+        $entityManager->persist($user);
+        $entityManager->persist($address);
+
+        $entityManager->flush();
+
+        return  new Response('welcome to doctrine one to one relationship!');
+    }
+
+
 }

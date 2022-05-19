@@ -35,7 +35,7 @@ class User
     private $phone;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToOne (targetEntity="App\Entity\Address",mappedBy="user")
      */
     private $address;
 
