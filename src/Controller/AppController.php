@@ -188,5 +188,38 @@ class AppController extends AbstractController
         return  new Response('welcome to doctrine one to one relationship!');
     }
 
+    /**
+     * @Route("/addUserAndinvitee/{name}",name="new_user_and_invitee")
+     * @return Response
+     */
+    public function addUserAndInvitee(string  $name,EntityManagerInterface  $entityManager)
+    {
+        $user = new User();
+        $user->setEmail('tes2022@yahoo.com')
+            ->setName($name)
+            ->setActive(true)
+            ->setPhone('109304')
+            ->setCreatedAt(new \DateTime())
+            ->setDateOfBirth(new \DateTime())
+            ->setPast('LEAD')
+            ->setTitle('CEO');
+        $user2 = new User();
+        $user2->setEmail('newaccount@yahoo.com')
+            ->setName('newaccount')
+            ->setActive(true)
+            ->setPhone('109303003304')
+            ->setCreatedAt(new \DateTime())
+            ->setDateOfBirth(new \DateTime())
+            ->setPast('LEAD')
+            ->setTitle('CEO')
+            ->setInvitedBy($user);
+
+        $entityManager->persist($user);
+        $entityManager->persist($user2);
+        $entityManager->flush();
+
+        return  new Response('welcome to doctrine self joining relationship!');
+    }
+
 
 }

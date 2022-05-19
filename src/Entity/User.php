@@ -68,6 +68,13 @@ class User
      */
     private $posts;
 
+
+    /**
+     * @ORM\OneToOne (targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=true,referencedColumnName="id")
+     */
+    private $invited_by;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -237,6 +244,24 @@ class User
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInvitedBy()
+    {
+        return $this->invited_by;
+    }
+
+    /**
+     * @param mixed $invited_by
+     * @return User
+     */
+    public function setInvitedBy($invited_by)
+    {
+        $this->invited_by = $invited_by;
         return $this;
     }
 }
