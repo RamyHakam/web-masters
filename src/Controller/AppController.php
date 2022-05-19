@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Address;
+use App\Entity\Groups;
 use App\Entity\MyData;
 use App\Entity\Post;
 use App\Entity\User;
@@ -219,6 +220,46 @@ class AppController extends AbstractController
         $entityManager->flush();
 
         return  new Response('welcome to doctrine self joining relationship!');
+    }
+
+    /**
+     * @Route("/addUserAndGroup/{name}",name="new_user_and_group")
+     * @return Response
+     */
+    public function addUserAndGroup(string  $name,EntityManagerInterface  $entityManager)
+    {
+        $group = new Groups();
+        $this->entityManager->persist($group);
+
+        $user = new User();
+        $user->setEmail('test2030@yahoo.com')
+            ->setName($name)
+            ->setActive(true)
+            ->setPhone('10900304')
+            ->setCreatedAt(new \DateTime())
+            ->setDateOfBirth(new \DateTime())
+            ->setPast('LEAD')
+            ->setTitle('CEO');
+        $user2 = new User();
+        $user2->setEmail('newaccount7887@yahoo.com')
+            ->setName('newaccount')
+            ->setActive(true)
+            ->setPhone('109jkk303003304')
+            ->setCreatedAt(new \DateTime())
+            ->setDateOfBirth(new \DateTime())
+            ->setPast('LEAD')
+            ->setTitle('CEO')
+            ->setInvitedBy($user);
+
+        $user->joinGroup($group);
+        $user2->joinGroup($group);
+
+        $entityManager->persist($user);
+        $entityManager->persist($user2);
+
+        $entityManager->flush();
+
+        return  new Response('welcome to doctrine many to many relationship!');
     }
 
 

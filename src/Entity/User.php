@@ -75,9 +75,17 @@ class User
      */
     private $invited_by;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Groups::class, inversedBy="members")
+     * @ORM\JoinTable(name="user_groups")
+     */
+    private $groups;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -262,6 +270,25 @@ class User
     public function setInvitedBy($invited_by)
     {
         $this->invited_by = $invited_by;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getGroups(): ArrayCollection
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param Groups $groups
+     * @return User
+     */
+    public function joinGroup(Groups $groups): User
+    {
+        $groups->addMember($this);
+        $this->groups[] = $groups;
         return $this;
     }
 }
