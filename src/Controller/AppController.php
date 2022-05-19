@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\MyData;
+use App\Entity\Post;
 use App\Entity\User;
 use App\Service\CommonInterface;
 use App\Service\CustomService;
@@ -112,6 +113,45 @@ class AppController extends AbstractController
 
         dd($user->getName());
 
+
+        return  new Response('welcome to doctrine!');
+    }
+
+    /**
+     * @Route("/addUserAndPost/{name}",name="new_user")
+     * @return Response
+     */
+    public function addUserAndPost(string  $name,EntityManagerInterface  $entityManager)
+    {
+        $user = new User();
+        $user->setEmail('tesdkdt@yahoo.com')
+            ->setName($name)
+            ->setActive(true)
+            ->setAddress('40595 , Giza')
+            ->setPhone('109304')
+            ->setCreatedAt(new \DateTime())
+            ->setDateOfBirth(new \DateTime())
+            ->setPast('LEAD')
+            ->setTitle('CEO');
+
+        $post = new Post();
+        $post->setLikes(100)
+            ->setPhoto('https://google.comdkd/png')
+            ->setCreatedAt(new \DateTime());
+        $post->setUser($user);
+        
+        $post2 = new Post();
+        $post2->setLikes(103030)
+            ->setPhoto('https://fb.com/png')
+            ->setCreatedAt(new \DateTime());
+
+        $post2->setUser($user);
+
+        $entityManager->persist($user);
+        $entityManager->persist($post);
+        $entityManager->persist($post2);
+
+        $entityManager->flush();
 
         return  new Response('welcome to doctrine!');
     }
