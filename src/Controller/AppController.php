@@ -263,4 +263,14 @@ class AppController extends AbstractController
     }
 
 
+    /**
+     * @Route("/getUserWithAddress/{id}",name="get_user_with_address")
+     * @return Response
+     */
+    public function getUserWithAddress(User $user)
+    {
+        $posts = $user->getPosts();
+        dd($user);
+
+    }
 }

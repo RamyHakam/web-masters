@@ -64,7 +64,8 @@ class User
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="User")
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="User",fetch="L")
+
      */
     private $posts;
 
