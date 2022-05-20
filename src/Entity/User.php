@@ -64,7 +64,8 @@ class User
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="User",fetch="L")
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="User",fetch="EAGER")
+
 
      */
     private $posts;
@@ -78,7 +79,8 @@ class User
 
 
     /**
-     * @ORM\ManyToMany(targetEntity=Groups::class, inversedBy="members")
+     * @ORM\ManyToMany(targetEntity=Groups::class, inversedBy="members", fetch="EAGER")
+
      * @ORM\JoinTable(name="user_groups")
      */
     private $groups;
