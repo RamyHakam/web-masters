@@ -69,7 +69,7 @@ class User
 
 
      */
-    private ArrayCollection $posts;
+    private $posts;
 
 
     /**
@@ -86,10 +86,16 @@ class User
      */
     private $groups;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Page::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $pages;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->groups = new ArrayCollection();
+        $this->pages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -293,6 +299,36 @@ class User
     {
         $groups->addMember($this);
         $this->groups[] = $groups;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Page>
+     */
+    public function getPages(): Collection
+    {
+        return $this->pages;
+    }
+
+    public function addPage(Page $page): self
+    {
+        if (!$this->pages->contains($page)) {
+            $this->pages[] = $page;
+            $page->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePage(Page $page): self
+    {
+        if ($this->pages->removeElement($page)) {
+            // set the owning side to null (unless already changed)
+            if ($page->getUser() === $this) {
+                $page->setUser(null);
+            }
+        }
+
         return $this;
     }
 }
