@@ -10,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Page
 {
+    private const STATUS_DRAFT = 'draft';
+    private const STATUS_PUBLISHED = 'published';
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -32,6 +35,11 @@ class Page
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="string", length=20,options={"default":"draft"})
+     */
+    private $status;
 
     public function getId(): ?int
     {
@@ -70,6 +78,18 @@ class Page
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
