@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Address;
 use App\Entity\Groups;
 use App\Entity\MyData;
+use App\Entity\Page;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Service\CommonInterface;
@@ -270,6 +271,33 @@ class AppController extends AbstractController
     {
         $posts = $user->getPosts();
         dd($user);
+
+    }
+
+
+    /**
+     * @Route("/addpage/{id}",name="add_page")
+     * @return Response
+     */
+    public function addPage(User $user)
+    {
+//        $page = new Page();
+//        $page->setName('page name')
+//            ->setDescription('page description')
+//            ->setUser($user);
+//        $this->entityManager->persist($page);
+//        $this->entityManager->flush();
+
+        $page = new Page();
+        $page->setName('page name 2 from user side ')
+            ->setDescription('page description');
+
+        $user->addPage($page);
+        $this->entityManager->persist($page);
+        $this->entityManager->flush();
+
+               return  new Response('welcome to doctrine owning and inverse side!');
+
 
     }
 }
