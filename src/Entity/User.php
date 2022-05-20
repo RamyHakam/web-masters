@@ -51,7 +51,7 @@ class User
     /**
      * @ORM\Column(type="string",nullable=true)
      */
-    private $past;
+    private string $past;
 
     /**
      * @ORM\Column(type="date",nullable=false)
@@ -69,7 +69,7 @@ class User
 
 
      */
-    private $posts;
+    private ArrayCollection $posts;
 
 
     /**
