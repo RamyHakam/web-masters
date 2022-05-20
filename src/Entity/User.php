@@ -64,7 +64,8 @@ class User
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="User",fetch="EAGER")
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="User",fetch="EXTRA_LAZY")
+
 
 
      */
@@ -79,7 +80,7 @@ class User
 
 
     /**
-     * @ORM\ManyToMany(targetEntity=Groups::class, inversedBy="members", fetch="EAGER")
+     * @ORM\ManyToMany(targetEntity=Groups::class, inversedBy="members", fetch="LAZY")
 
      * @ORM\JoinTable(name="user_groups")
      */
@@ -132,7 +133,7 @@ class User
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getAddress(): ?Address
     {
         return $this->address;
     }

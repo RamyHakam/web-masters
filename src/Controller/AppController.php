@@ -71,14 +71,13 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/post/{email}/{name}",name="user_post")
-     * @ParamConverter("user",options={"mapping":{"name":"name"}})
-     * @ParamConverter("data",options={"mapping":{"email":"email"}})
+     * @Route("/post/{id}",name="user_post")
+
      * @return Response
      */
-    public function post(User $user,MyData $data)
+    public function post(User $user)
     {
-      return  $this->render('post.html.twig',['user' => $user,'data' =>$data]);
+      return  $this->render('post.html.twig',['user' => $user]);
     }
 
     /**
