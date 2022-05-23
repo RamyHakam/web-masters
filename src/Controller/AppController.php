@@ -26,6 +26,7 @@ use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -264,14 +265,13 @@ class AppController extends AbstractController
 
 
     /**
-     * @Route("/getUserWithAddress/{id}",name="get_user_with_address")
+     * @Route("/getUserObject/{id}",name="get_user_with_address")
      * @return Response
      */
-    public function getUserWithAddress(User $user)
+    public function getUserObject(User $user)
     {
-        $posts = $user->getPosts();
-        dd($user);
-
+        $publishedPages = $user->getPublishedPages();
+        return  $this->render('post.html.twig',['user' => $user,'publishedPages'=> $publishedPages]);
     }
 
 
@@ -299,7 +299,5 @@ class AppController extends AbstractController
         $this->entityManager->flush();
 
                return  new Response('welcome to doctrine owning and inverse side!');
-
-
     }
 }

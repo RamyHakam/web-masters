@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Page;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -27,15 +29,14 @@ class UserRepository extends ServiceEntityRepository
             ->setParameter('val', $value)
             ->orderBy('u.id', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     public function findByPastUsingMyDql($value)
     {
-        $dql = 'SELECT user FROM App\Entity\User user WHERE user.past != '. "'".$value."'";
+        $dql = 'SELECT user FROM App\Entity\User user WHERE user.past != ' . "'" . $value . "'";
         $dql = $this->getEntityManager()->createQuery($dql);
-        return  $dql->execute();
+        return $dql->execute();
     }
 
     public function findByNotPast($value)
@@ -45,15 +46,14 @@ class UserRepository extends ServiceEntityRepository
             ->setParameter('val', $value)
             ->orderBy('u.id', 'ASC')
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     public function findByTerm($term)
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.title LIKE :term  OR u.past LIKE :term and u.name LIKE :term')
-            ->setParameter('term','%'.$term ."%")
+            ->setParameter('term', '%' . $term . "%")
             ->getQuery()
             ->getResult();
 

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Page;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -64,15 +65,17 @@ class PageRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Page
+    public  static function getPublishedCriteria():Criteria
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return   $criteria = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('status', Page::STATUS_PUBLISHED));
     }
-    */
+
+  public function getPublishedPages():?array
+  {
+     return  $this->createQueryBuilder('p')
+          ->addCriteria(self::getPublishedCriteria())
+          ->getQuery()
+          ->getResult();
+  }
 }

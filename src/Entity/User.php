@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
+use App\Repository\PageRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -308,6 +310,14 @@ class User
     public function getPages(): Collection
     {
         return $this->pages;
+    }
+
+    /**
+     * @return Collection<int, Page>
+     */
+    public function getPublishedPages(): Collection
+    {
+      return   $this->pages->matching(PageRepository::getPublishedCriteria());
     }
 
     public function addPage(Page $page): self

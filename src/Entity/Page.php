@@ -93,4 +93,14 @@ class Page
 
         return $this;
     }
+
+    public function isDraft(): bool
+    {
+        return $this->status === self::STATUS_DRAFT;
+    }
+
+    public function isPublished(): bool
+    {
+        return $this->status === self::STATUS_PUBLISHED;
+    }
 }
