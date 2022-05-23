@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Page
 {
-    private const STATUS_DRAFT = 'draft';
-    private const STATUS_PUBLISHED = 'published';
+    public const STATUS_DRAFT = 'draft';
+    public const STATUS_PUBLISHED = 'published';
     
     /**
      * @ORM\Id

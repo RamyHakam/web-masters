@@ -284,13 +284,15 @@ class AppController extends AbstractController
 //        $page = new Page();
 //        $page->setName('page name')
 //            ->setDescription('page description')
-//            ->setUser($user);
+//            ->setUser($user)
+//            ->setCreatedAt(new \DateTime());
 //        $this->entityManager->persist($page);
 //        $this->entityManager->flush();
 
         $page = new Page();
         $page->setName('page name 2 from user side ')
-            ->setDescription('page description');
+            ->setDescription('page description')
+            ->setStatus(Page::STATUS_DRAFT);
 
         $user->addPage($page);
         $this->entityManager->persist($page);
