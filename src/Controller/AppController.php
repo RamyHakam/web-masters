@@ -127,12 +127,10 @@ class AppController extends AbstractController
     public function addUserAndPost(string  $name,EntityManagerInterface  $entityManager)
     {
         $user = new User();
-        $user->setEmail('tesdkdt@yahoo.com')
+        $user->setEmail('tesdddlkddt@yahoo.com')
             ->setName($name)
             ->setActive(true)
-            ->setAddress('40595 , Giza')
             ->setPhone('109304')
-            ->setCreatedAt(new \DateTime())
             ->setDateOfBirth(new \DateTime())
             ->setPast('LEAD')
             ->setTitle('CEO');
