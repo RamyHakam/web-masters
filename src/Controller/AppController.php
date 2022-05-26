@@ -131,6 +131,7 @@ class AppController extends AbstractController
             ->setName($name)
             ->setActive(true)
             ->setPhone('109304')
+            ->setPassword('123456')
             ->setDateOfBirth(new \DateTime())
             ->setPast('LEAD')
             ->setTitle('CEO');
