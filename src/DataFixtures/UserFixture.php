@@ -4,9 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class UserFixture extends Fixture
+class UserFixture extends Fixture implements  FixtureGroupInterface
 {
     public const MainUser = 'main-user';
     public function load(ObjectManager $manager)
@@ -36,5 +37,10 @@ class UserFixture extends Fixture
             $manager->persist($user);
             $manager->flush();
         }
+    }
+
+    public static function getGroups(): array
+    {
+        return ['main'];
     }
 }
