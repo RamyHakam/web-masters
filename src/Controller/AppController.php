@@ -94,14 +94,15 @@ class AppController extends AbstractController
     }
 
     /**
-     * @Route("/search/{term}",name="search_users")
+     * @Route("/update/{id}",name="search_users")
      * @return Response
      */
-    public function searchUser($term)
+    public function updateUser(User  $user)
     {
-        $repository = $this->entityManager->getRepository(User::class);
-        $users = $repository->findByTerm($term);
-        return  $this->render('List.html.twig',['users' => $users]);
+        $user->setName('Updated Name To Test');
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+        return  new Response('User Updated');
     }
 
     /**
