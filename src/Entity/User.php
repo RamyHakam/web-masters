@@ -87,7 +87,7 @@ class User
 
 
     /**
-     * @ORM\ManyToMany(targetEntity=Groups::class, inversedBy="members", fetch="LAZY")
+     * @ORM\ManyToMany(targetEntity=SymfonyGroup::class, inversedBy="members", fetch="LAZY")
 
      * @ORM\JoinTable(name="user_groups")
      */
@@ -299,10 +299,22 @@ class User
     }
 
     /**
-     * @param Groups $groups
+     * @param array $groups
      * @return User
      */
-    public function joinGroup(Groups $groups): User
+    public function setGroups(array $groups): User
+    {
+        $this->groups = $groups;
+        return $this;
+    }
+
+
+
+    /**
+     * @param SymfonyGroup $groups
+     * @return User
+     */
+    public function joinGroup(SymfonyGroup $groups): User
     {
         $groups->addMember($this);
         $this->groups[] = $groups;

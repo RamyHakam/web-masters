@@ -5,7 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Address;
-use App\Entity\Groups;
+use App\Entity\SymfonyGroup;
 use App\Entity\MyData;
 use App\Entity\Page;
 use App\Entity\Post;
@@ -229,7 +229,7 @@ class AppController extends AbstractController
      */
     public function addUserAndGroup(string  $name,EntityManagerInterface  $entityManager)
     {
-        $group = new Groups();
+        $group = new SymfonyGroup();
         $this->entityManager->persist($group);
 
         $user = new User();
