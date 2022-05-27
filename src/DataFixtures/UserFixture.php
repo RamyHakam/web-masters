@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use App\Factory\PostFactory;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
@@ -13,23 +14,10 @@ class UserFixture extends Fixture implements  FixtureGroupInterface
     public const MainUser = 'main-user';
     public function load(ObjectManager $manager)
     {
-        $mainUser = new User();
-        $mainUser->setEmail('admin@yahoo.com')
-            ->setName('testName admin')
-            ->setActive(true)
-            ->setPhone('109304')
-            ->setPassword('123456')
-            ->setDateOfBirth(new \DateTime())
-            ->setPast('LEAD')
-            ->setTitle('CEO');
-        $manager->persist($mainUser);
-        $this->addReference(self::MainUser, $mainUser);
-
-         UserFactory::createMany(30);
+         UserFactory::createMany(30,['posts' => PostFactory::new()->many(10)]);
          $manager->flush();
 
     }
-
     public static function getGroups(): array
     {
         return ['main'];
