@@ -42,7 +42,7 @@ class User
     private $phone;
 
     /**
-     * @ORM\OneToOne (targetEntity="App\Entity\Address",mappedBy="user")
+     * @ORM\OneToOne (targetEntity="App\Entity\Address",mappedBy="user", cascade={"persist", "remove"})
      */
     private $address;
 
@@ -151,7 +151,7 @@ class User
         return $this->address;
     }
 
-    public function setAddress(?string $address): self
+    public function setAddress(?Address $address): self
     {
         $this->address = $address;
 

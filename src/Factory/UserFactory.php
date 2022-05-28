@@ -2,6 +2,7 @@
 
 namespace App\Factory;
 
+use App\Entity\Address;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -51,7 +52,15 @@ final class UserFactory extends ModelFactory
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
         return $this
-            // ->afterInstantiate(function(User $user): void {})
+            ->afterInstantiate(function(User $user): void {
+                $address = new Address();
+                $address->setStreet(self::faker()->streetName)
+                    ->setCity(self::faker()->city)
+                    ->setNumber(self::faker()->numberBetween(1, 100))
+                    ->setUser($user);
+                $user->setAddress($address);
+
+            })
         ;
     }
 
