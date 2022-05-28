@@ -4,12 +4,15 @@ namespace App\Entity;
 
 use App\Repository\PageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass=PageRepository::class)
  */
 class Page
 {
+     use TimestampableEntity;
+
     public const STATUS_DRAFT = 'draft';
     public const STATUS_PUBLISHED = 'published';
     
