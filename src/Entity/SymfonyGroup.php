@@ -25,7 +25,7 @@ class SymfonyGroup
     private  string $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="groups")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="groups")
      */
     private $members;
 

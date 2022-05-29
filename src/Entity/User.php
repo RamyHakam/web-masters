@@ -43,7 +43,7 @@ class User
     private $phone;
 
     /**
-     * @ORM\OneToOne (targetEntity="App\Entity\Address",mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne (targetEntity=Address::class,mappedBy="user", cascade={"persist", "remove"})
      */
     private $address;
 
@@ -82,7 +82,7 @@ class User
 
 
     /**
-     * @ORM\OneToOne (targetEntity="App\Entity\User")
+     * @ORM\OneToOne (targetEntity=User::class)
      * @ORM\JoinColumn(nullable=true,referencedColumnName="id")
      */
     private $invited_by;
