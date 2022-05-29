@@ -112,6 +112,9 @@
     "gedmo/doctrine-extensions": {
         "version": "v3.7.0"
     },
+    "hakam/multi-tenancy-bundle": {
+        "version": "v1.0.0"
+    },
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
@@ -426,6 +429,9 @@
     },
     "symfony/options-resolver": {
         "version": "v5.3.0"
+    },
+    "symfony/orm-pack": {
+        "version": "v2.2.0"
     },
     "symfony/password-hasher": {
         "version": "v5.3.0"

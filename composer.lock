@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d1d7adffb0d883a48d5d748932e4fe3a",
+    "content-hash": "d301a7c201fd4d3e2b487c4639ac1cbb",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1757,6 +1757,57 @@
                 "wiki": "https://github.com/Atlantic18/DoctrineExtensions/tree/main/doc"
             },
             "time": "2022-05-17T06:58:52+00:00"
+        },
+        {
+            "name": "hakam/multi-tenancy-bundle",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RamyHakam/multi_tenancy_bundle.git",
+                "reference": "ea7cb7ca45631399324e952064ae812a80999a76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RamyHakam/multi_tenancy_bundle/zipball/ea7cb7ca45631399324e952064ae812a80999a76",
+                "reference": "ea7cb7ca45631399324e952064ae812a80999a76",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/annotations": "^1.10",
+                "doctrine/doctrine-bundle": "^2.1",
+                "doctrine/doctrine-migrations-bundle": "^3.0",
+                "php": "^7.4",
+                "symfony/config": "^5.3.1",
+                "symfony/dependency-injection": "^5.3.1",
+                "symfony/http-kernel": "^5.3.1",
+                "symfony/orm-pack": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5",
+                "symfony/phpunit-bridge": "^5.2@dev"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Hakam\\MultiTenancyBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ramy hakam",
+                    "email": "pencilsoft1@gmail.com"
+                }
+            ],
+            "description": "Symfony bundle to extend doctrine to support db switcher and multi tenants",
+            "support": {
+                "issues": "https://github.com/RamyHakam/multi_tenancy_bundle/issues",
+                "source": "https://github.com/RamyHakam/multi_tenancy_bundle/tree/v1.0.0"
+            },
+            "time": "2022-05-28T18:39:39+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -4917,6 +4968,52 @@
                 }
             ],
             "time": "2022-01-02T09:51:59+00:00"
+        },
+        {
+            "name": "symfony/orm-pack",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/orm-pack.git",
+                "reference": "c4728ba9ed071876f71df637c7dff0490c9252b2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/orm-pack/zipball/c4728ba9ed071876f71df637c7dff0490c9252b2",
+                "reference": "c4728ba9ed071876f71df637c7dff0490c9252b2",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "*",
+                "doctrine/doctrine-migrations-bundle": "*",
+                "doctrine/orm": "*",
+                "symfony/proxy-manager-bridge": "*"
+            },
+            "type": "symfony-pack",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A pack for the Doctrine ORM",
+            "support": {
+                "issues": "https://github.com/symfony/orm-pack/issues",
+                "source": "https://github.com/symfony/orm-pack/tree/v2.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-01-12T09:53:02+00:00"
         },
         {
             "name": "symfony/password-hasher",
