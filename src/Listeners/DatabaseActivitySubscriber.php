@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Entity\User;
+use App\Entity\Main\User;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Psr\Log\LoggerInterface;

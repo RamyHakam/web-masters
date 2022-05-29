@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\User;
 use App\Factory\PostFactory;
 use App\Factory\SymfonyGroupFactory;
 use App\Factory\UserFactory;

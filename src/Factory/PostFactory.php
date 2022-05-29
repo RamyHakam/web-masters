@@ -2,11 +2,11 @@
 
 namespace App\Factory;
 
-use App\Entity\Post;
+use App\Entity\Main\Post;
 use App\Repository\PostRepository;
-use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
+use Zenstruck\Foundry\RepositoryProxy;
 
 /**
  * @extends ModelFactory<Post>

@@ -2,11 +2,11 @@
 
 namespace App\Factory;
 
-use App\Entity\Page;
+use App\Entity\Main\Page;
 use App\Repository\PageRepository;
-use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
+use Zenstruck\Foundry\RepositoryProxy;
 
 /**
  * @extends ModelFactory<Page>

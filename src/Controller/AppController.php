@@ -4,29 +4,18 @@
 namespace App\Controller;
 
 
-use App\Entity\Address;
-use App\Entity\SymfonyGroup;
+use App\Entity\Main\Address;
+use App\Entity\Main\Page;
+use App\Entity\Main\Post;
+use App\Entity\Main\SymfonyGroup;
+use App\Entity\Main\User;
 use App\Entity\MyData;
-use App\Entity\Page;
-use App\Entity\Post;
-use App\Entity\User;
-use App\Service\CommonInterface;
 use App\Service\CustomService;
-use App\Service\FirstActionService;
-use App\Service\FirstClassService;
-use App\Service\FirstService;
-use App\Service\HeavyService;
 use App\Service\MyOwnServiceLocator;
 use App\Service\RandomNumberService;
-use App\Service\SecondActionService;
 use App\Service\ThirdActionService;
 use Doctrine\ORM\EntityManagerInterface;
-use Monolog\Logger;
-use Psr\Log\LoggerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 

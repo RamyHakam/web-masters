@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Main;
 
 use App\Repository\GroupsRepository;
 use Doctrine\Common\Collections\ArrayCollection;

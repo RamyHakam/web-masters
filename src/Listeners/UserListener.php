@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Entity\User;
+use App\Entity\Main\User;
 use App\Service\EncryptPasswordService;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 

@@ -2,12 +2,12 @@
 
 namespace App\Factory;
 
-use App\Entity\Address;
-use App\Entity\User;
+use App\Entity\Main\Address;
+use App\Entity\Main\User;
 use App\Repository\UserRepository;
-use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
+use Zenstruck\Foundry\RepositoryProxy;
 
 /**
  * @extends ModelFactory<User>
