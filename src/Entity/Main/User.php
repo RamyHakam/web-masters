@@ -100,6 +100,11 @@ class User
      */
     private $pages;
 
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $dbid;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -375,6 +380,18 @@ class User
     public function setPassword($password)
     {
         $this->password = $password;
+        return $this;
+    }
+
+    public function getDbid(): ?string
+    {
+        return $this->dbid;
+    }
+
+    public function setDbid(?string $dbid): self
+    {
+        $this->dbid = $dbid;
+
         return $this;
     }
 }

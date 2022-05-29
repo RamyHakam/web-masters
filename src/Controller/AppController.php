@@ -15,7 +15,10 @@ use App\Service\MyOwnServiceLocator;
 use App\Service\RandomNumberService;
 use App\Service\ThirdActionService;
 use Doctrine\ORM\EntityManagerInterface;
+use Hakam\MultiTenancyBundle\Doctrine\ORM\TenantEntityManager;
+use Hakam\MultiTenancyBundle\Event\SwitchDbEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -31,12 +34,14 @@ class AppController extends AbstractController
      * @var EntityManagerInterface
      */
     private $entityManager;
+    private EventDispatcher $dispatcher;
 
-    public function __construct(MyOwnServiceLocator $serviceLocator,EntityManagerInterface  $entityManager)
+    public function __construct(MyOwnServiceLocator $serviceLocator,EntityManagerInterface  $entityManager,EventDispatcher  $dispatcher)
     {
 
         $this->serviceLocator = $serviceLocator;
         $this->entityManager = $entityManager;
+        $this->dispatcher = $dispatcher;
     }
 
 
@@ -254,11 +259,27 @@ class AppController extends AbstractController
 
 
     /**
-     * @Route("/getUserObject/{id}",name="get_user_with_address")
+     * @Route("/addDataToCustomerDb/{id}",name="add_data_to_customer_db")
      * @return Response
      */
-    public function getUserObject(User $user)
+    public function addDataToCustomerDbObject(User $user, TenantEntityManager  $tenantEntityManager)
     {
+
+        $dbSwitchEvent = new SwitchDbEvent($user->getDbid());
+        $this->dispatcher->dispatch($dbSwitchEvent);
+
+        $tenantEntityManager->persist( );
+        $tenantEntityManager->flush();
+
+        $dbSwitchEvent = new SwitchDbEvent(2);
+        $this->dispatcher->dispatch($dbSwitchEvent);
+        $tenantEntityManager->persist( );
+        $tenantEntityManager->flush();
+
+
+
+        $address = $user->getAddress();
+        return  new Response('welcome to doctrine one to one relationship!');
         $publishedPages = $user->getPublishedPages();
         return  $this->render('post.html.twig',['user' => $user,'publishedPages'=> $publishedPages]);
     }
