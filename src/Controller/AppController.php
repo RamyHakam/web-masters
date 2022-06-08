@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Customer\Offer;
 use App\Entity\Main\Address;
 use App\Entity\Main\Page;
 use App\Entity\Main\Post;
@@ -17,6 +18,7 @@ use App\Service\ThirdActionService;
 use Doctrine\ORM\EntityManagerInterface;
 use Hakam\MultiTenancyBundle\Doctrine\ORM\TenantEntityManager;
 use Hakam\MultiTenancyBundle\Event\SwitchDbEvent;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,9 +36,9 @@ class AppController extends AbstractController
      * @var EntityManagerInterface
      */
     private $entityManager;
-    private EventDispatcher $dispatcher;
+    private EventDispatcherInterface $dispatcher;
 
-    public function __construct(MyOwnServiceLocator $serviceLocator,EntityManagerInterface  $entityManager,EventDispatcher  $dispatcher)
+    public function __construct(MyOwnServiceLocator $serviceLocator,EntityManagerInterface  $entityManager,EventDispatcherInterface  $dispatcher)
     {
 
         $this->serviceLocator = $serviceLocator;
@@ -262,26 +264,29 @@ class AppController extends AbstractController
      * @Route("/addDataToCustomerDb/{id}",name="add_data_to_customer_db")
      * @return Response
      */
-    public function addDataToCustomerDbObject(User $user, TenantEntityManager  $tenantEntityManager)
+    public function addDataToCustomerDbObject(User $user, TenantEntityManager  $tenantEntityManager,)
     {
 
         $dbSwitchEvent = new SwitchDbEvent($user->getDbid());
         $this->dispatcher->dispatch($dbSwitchEvent);
+        
+        $offer = new Offer();
+        $offer->setCode('12340#');
+        $offer->setPrice('3000');
+        $offer->setItems('MacBook');
+        $tenantEntityManager->persist( $offer);
+        $tenantEntityManager->flush($offer);
 
-        $tenantEntityManager->persist( );
-        $tenantEntityManager->flush();
+        $offer2 = new Offer();
+        $offer2->setCode('Customer2DB#');
+        $offer2->setPrice('400');
+        $offer2->setItems('DELL');
 
         $dbSwitchEvent = new SwitchDbEvent(2);
         $this->dispatcher->dispatch($dbSwitchEvent);
-        $tenantEntityManager->persist( );
-        $tenantEntityManager->flush();
-
-
-
-        $address = $user->getAddress();
+        $tenantEntityManager->persist($offer2);
+        $tenantEntityManager->flush($offer2);
         return  new Response('welcome to doctrine one to one relationship!');
-        $publishedPages = $user->getPublishedPages();
-        return  $this->render('post.html.twig',['user' => $user,'publishedPages'=> $publishedPages]);
     }
 
 
