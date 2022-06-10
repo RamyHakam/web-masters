@@ -11,6 +11,7 @@ use App\Entity\Main\Post;
 use App\Entity\Main\SymfonyGroup;
 use App\Entity\Main\User;
 use App\Entity\MyData;
+use App\Form\AccountFormType;
 use App\Service\CustomService;
 use App\Service\MyOwnServiceLocator;
 use App\Service\RandomNumberService;
@@ -44,6 +45,17 @@ class AppController extends AbstractController
         $this->serviceLocator = $serviceLocator;
         $this->entityManager = $entityManager;
         $this->dispatcher = $dispatcher;
+    }
+
+
+    /**
+     * @Route("/login",name="login_page")
+     * @return Response
+     */
+    public function login()
+    {
+        $form = $this->createForm(AccountFormType::class);
+        return $this->render('login.html.twig',['loginForm' => $form->createView()]);
     }
 
 
@@ -264,7 +276,7 @@ class AppController extends AbstractController
      * @Route("/addDataToCustomerDb/{id}",name="add_data_to_customer_db")
      * @return Response
      */
-    public function addDataToCustomerDbObject(User $user, TenantEntityManager  $tenantEntityManager,)
+    public function addDataToCustomerDbObject(User $user, TenantEntityManager  $tenantEntityManager)
     {
 
         $dbSwitchEvent = new SwitchDbEvent($user->getDbid());
