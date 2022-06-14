@@ -18,6 +18,7 @@ use App\Service\MyOwnServiceLocator;
 use App\Service\RandomNumberService;
 use App\Service\ThirdActionService;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Hakam\MultiTenancyBundle\Doctrine\ORM\TenantEntityManager;
 use Hakam\MultiTenancyBundle\Event\SwitchDbEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -90,11 +91,19 @@ class AppController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
-            /**@var User $userData */
-            $userData = $form->getData();
-            $userData->setActive(true);
-            $this->entityManager->persist($userData);
-            $this->entityManager->flush();
+            try{
+                /**@var User $userData */
+                $userData = $form->getData();
+                $userData->setActive(true);
+                $this->entityManager->persist($userData);
+                throw new Exception('test');
+                $this->entityManager->flush();
+                $this->addFlash('success','User created successfully');
+
+            }catch (Exception $e){
+                $this->addFlash('error','Errors while creating user');
+
+            }
         }
 
        return $this->render('signup.html.twig',['signupForm' => $form->createView()]);

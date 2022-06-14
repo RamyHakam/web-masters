@@ -20,6 +20,17 @@
         {% endblock %}
     </head>
     <body>
+  {% for flash in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ flash }}
+        </div>
+  {% endfor %}
+
+  {% for flash in app.flashes('error') %}
+      <div class="alert alert-warning">
+          {{ flash }}
+      </div>
+  {% endfor %}
         {% block body %}
         <h1> Welcome to our Symfony 5 course ya</h1>
             <ul>
