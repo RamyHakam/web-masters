@@ -12,6 +12,7 @@ use App\Entity\Main\SymfonyGroup;
 use App\Entity\Main\User;
 use App\Entity\MyData;
 use App\Form\AccountFormType;
+use App\Form\UserRegisterType;
 use App\Service\CustomService;
 use App\Service\MyOwnServiceLocator;
 use App\Service\RandomNumberService;
@@ -82,9 +83,21 @@ class AppController extends AbstractController
      * @Route("/signup",name="signup_page")
      * @return Response
      */
-    public function signUp()
+    public function signUp( Request  $request)
     {
-       return $this->render('signup.html.twig');
+        $form = $this->createForm(UserRegisterType::class);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            /**@var User $userData */
+            $userData = $form->getData();
+            $userData->setActive(true);
+            $this->entityManager->persist($userData);
+            $this->entityManager->flush();
+        }
+
+       return $this->render('signup.html.twig',['signupForm' => $form->createView()]);
     }
 
     /**
