@@ -57,5 +57,13 @@ class UserRepository extends ServiceEntityRepository
 
     }
 
+    public function  findAllWithDbID() : array
+    {
+         return $this->createQueryBuilder('u')
+         ->where('u.dbid IS NOT NULL')
+            ->getQuery()
+            ->getResult();
+    }
+
 
 }

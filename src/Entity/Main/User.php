@@ -291,7 +291,7 @@ class User
      * @param mixed $invited_by
      * @return User
      */
-    public function setInvitedBy($invited_by)
+    public function setInvitedBy( User $invited_by)
     {
         $this->invited_by = $invited_by;
         return $this;
@@ -393,5 +393,10 @@ class User
         $this->dbid = $dbid;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }
