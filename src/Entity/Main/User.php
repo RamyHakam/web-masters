@@ -25,7 +25,7 @@ class User
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string  $name;
 
     /**
      * @ORM\Column(type="string", length=255)

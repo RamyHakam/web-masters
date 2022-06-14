@@ -96,7 +96,6 @@ class AppController extends AbstractController
                 $userData = $form->getData();
                 $userData->setActive(true);
                 $this->entityManager->persist($userData);
-                throw new Exception('test');
                 $this->entityManager->flush();
                 $this->addFlash('success','User created successfully');
 
