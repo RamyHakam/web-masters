@@ -28,7 +28,7 @@ class UserRegisterType extends AbstractType
         $builder
             ->add('name',TextType::class,['help'=>'Введите имя'])
             ->add('password',PasswordType::class,['help'=>'Your Strong Password'])
-            ->add('email',EmailType::class,['help'=>'Введите ваш email'])
+            ->add('email',TextType::class,['help'=>'Введите ваш email'])
             ->add('phone')
             ->add('title')
             ->add('invited_by',EntityType::class,['class'=>User::class,'choices'=> $this->userRepository->findAllWithDbId(),
