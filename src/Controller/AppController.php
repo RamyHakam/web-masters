@@ -27,6 +27,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AppController extends AbstractController
 {
@@ -84,7 +85,7 @@ class AppController extends AbstractController
      * @Route("/signup",name="signup_page")
      * @return Response
      */
-    public function signUp( Request  $request)
+    public function signUp( Request  $request , ValidatorInterface  $validator)
     {
         $form = $this->createForm(UserRegisterType::class);
 
@@ -94,6 +95,9 @@ class AppController extends AbstractController
             try{
                 /**@var User $userData */
                 $userData = $form->getData();
+                $userData->setName('test ramy' )
+                    ->setTitle('Mr');
+                $errors = $validator->validate($userData);
                 $userData->setActive(true);
                 $this->entityManager->persist($userData);
                 $this->entityManager->flush();
