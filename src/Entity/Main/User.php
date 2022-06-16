@@ -4,6 +4,7 @@ namespace App\Entity\Main;
 
 use App\Repository\PageRepository;
 use App\Repository\UserRepository;
+use App\Validator\UniqueUser;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,6 +43,7 @@ class User
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @UniqueUser()
      */
     private $email;
 
