@@ -56,6 +56,7 @@ class User
 
     /**
      * @ORM\Column(type="string",nullable=false)
+     * @Assert\Choice(choices={"CEO","CTO"},message="You should be From The  C Level or above")
      */
     private $title;
     /**
