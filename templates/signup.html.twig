@@ -12,12 +12,8 @@
         {{ form_help(signupForm.name) }}
         {{ form_widget(signupForm.name,{'attr':{'class':'text-success'}}) }}
         {{ form_errors(signupForm.name) }}
-        {{ form_row(signupForm.title) }}
-        {{ form_row(signupForm.password) }}
-        {{ form_row(signupForm.dateOfBirth) }}
-        {{ form_row(signupForm.invited_by) }}
-        {{ form_row(signupForm.phone) }}
-        {{ form_row(signupForm.email) }}
+
+        {{ form_rest(signupForm) }}
         <button type="submit" class="btn btn-primary">Sign Up</button>
         {{ form_end(signupForm) }}
     </div>
