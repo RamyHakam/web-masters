@@ -8,9 +8,9 @@
     <div class="container">
         {{ form_start(signupForm) }}
 
-        {{ form_label(signupForm.name) }}
+        {{ form_label(signupForm.name,'Your Name Is Here') }}
         {{ form_help(signupForm.name) }}
-        {{ form_widget(signupForm.name) }}
+        {{ form_widget(signupForm.name,{'attr':{'class':'text-success'}}) }}
         {{ form_errors(signupForm.name) }}
         {{ form_row(signupForm.title) }}
         {{ form_row(signupForm.password) }}
