@@ -7,7 +7,17 @@
 {% block body %}
     <div class="container">
         {{ form_start(signupForm) }}
-        {{ form_widget(signupForm) }}
+
+        {{ form_label(signupForm.name) }}
+        {{ form_help(signupForm.name) }}
+        {{ form_widget(signupForm.name) }}
+        {{ form_errors(signupForm.name) }}
+        {{ form_row(signupForm.title) }}
+        {{ form_row(signupForm.password) }}
+        {{ form_row(signupForm.dateOfBirth) }}
+        {{ form_row(signupForm.invited_by) }}
+        {{ form_row(signupForm.phone) }}
+        {{ form_row(signupForm.email) }}
         <button type="submit" class="btn btn-primary">Sign Up</button>
         {{ form_end(signupForm) }}
     </div>
