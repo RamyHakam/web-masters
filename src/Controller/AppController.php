@@ -112,6 +112,37 @@ class AppController extends AbstractController
        return $this->render('signup.html.twig',['signupForm' => $form->createView()]);
     }
 
+
+
+    /**
+     * @Route("/edit/{id}",name="signup_page")
+     * @return Response
+     */
+    public function update( User $user, Request  $request )
+    {
+        $form = $this->createForm(UserRegisterType::class,$user);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            try{
+                /**@var User $userData */
+                $userData = $form->getData();
+                $userData->setActive(true);
+                $this->entityManager->persist($userData);
+                $this->entityManager->flush();
+                $this->addFlash('success','User updated successfully');
+
+            }catch (Exception $e){
+                $this->addFlash('error','Errors while updating user');
+
+            }
+        }
+
+        return $this->render('edit.html.twig',['updateForm' => $form->createView()]);
+    }
+
+
     /**
      * @Route("/post/{id}",name="user_post")
 
