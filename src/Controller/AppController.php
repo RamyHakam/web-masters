@@ -10,7 +10,6 @@ use App\Entity\Main\Page;
 use App\Entity\Main\Post;
 use App\Entity\Main\SymfonyGroup;
 use App\Entity\Main\User;
-use App\Entity\MyData;
 use App\Form\AccountFormType;
 use App\Form\UserRegisterType;
 use App\Service\CustomService;
@@ -23,7 +22,6 @@ use Hakam\MultiTenancyBundle\Doctrine\ORM\TenantEntityManager;
 use Hakam\MultiTenancyBundle\Event\SwitchDbEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -115,7 +113,7 @@ class AppController extends AbstractController
 
 
     /**
-     * @Route("/edit/{id}",name="signup_page")
+     * @Route("/edit/{id}",name="edit_page")
      * @return Response
      */
     public function update( User $user, Request  $request )
