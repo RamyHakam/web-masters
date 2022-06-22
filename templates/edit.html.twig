@@ -2,16 +2,8 @@
 
 {% block body %}
     <div class="container">
-        {{ form_start(updateForm) }}
-
-        {{ form_label(updateForm.name,'Your Name Is Here') }}
-        {{ form_help(updateForm.name) }}
-        {{ form_widget(updateForm.name,{'attr':{'class':'text-success'}}) }}
-        {{ form_errors(updateForm.name) }}
-
-        {{ form_rest(updateForm) }}
-        <button type="submit" class="btn btn-primary">update</button>
-        {{ form_end(updateForm) }}
+       <h1> Update User</h1>
+        {{ include('_form.html.twig',{'button_text':'update'}) }}
     </div>
 {% endblock %}
 

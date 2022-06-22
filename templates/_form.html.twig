@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+
+        {{ form_label(form.name,'Your Name Is Here') }}
+        {{ form_help(form.name) }}
+        {{ form_widget(form.name,{'attr':{'class':'text-success'}}) }}
+        {{ form_errors(form.name) }}
+
+        {{ form_rest(form) }}
+<button type="submit" class="btn btn-primary">{{ button_text }}</button>
+{{ form_end(form) }}

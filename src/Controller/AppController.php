@@ -107,7 +107,7 @@ class AppController extends AbstractController
             }
         }
 
-       return $this->render('signup.html.twig',['signupForm' => $form->createView()]);
+       return $this->render('signup.html.twig',['form' => $form->createView()]);
     }
 
 
@@ -137,7 +137,7 @@ class AppController extends AbstractController
             }
         }
 
-        return $this->render('edit.html.twig',['updateForm' => $form->createView()]);
+        return $this->render('edit.html.twig',['form' => $form->createView()]);
     }
 
 

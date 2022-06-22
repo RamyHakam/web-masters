@@ -6,15 +6,7 @@
 
 {% block body %}
     <div class="container">
-        {{ form_start(signupForm) }}
-
-        {{ form_label(signupForm.name,'Your Name Is Here') }}
-        {{ form_help(signupForm.name) }}
-        {{ form_widget(signupForm.name,{'attr':{'class':'text-success'}}) }}
-        {{ form_errors(signupForm.name) }}
-
-        {{ form_rest(signupForm) }}
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-        {{ form_end(signupForm) }}
+        <h1> Create User</h1>
+        {{ include('_form.html.twig',{'button_text':'Signup'}) }}
     </div>
 {% endblock %}
