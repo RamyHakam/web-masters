@@ -112,4 +112,8 @@ class Address
         $this->number = $number;
         return $this;
     }
+    public function __toString():string
+    {
+       return $this->street . ' ' . $this->city . ' ' . $this->number;
+    }
 }

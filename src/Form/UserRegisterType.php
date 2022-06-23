@@ -31,6 +31,7 @@ class UserRegisterType extends AbstractType
             ->add('email',TextType::class,['help'=>'Введите ваш email'])
             ->add('phone')
             ->add('title')
+            ->add('address',TextType::class,['help'=>'your address','attr'=>['placeholder'=>'street, city, number']])
             ->add('invited_by',EntityType::class,['class'=>User::class,'choices'=> $this->userRepository->findAllWithDbId(),
                 'choice_label'=>function(User $user){
                 return sprintf('%s -- %s',$user->getName(),$user->getDbid());
