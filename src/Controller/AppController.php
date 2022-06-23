@@ -13,6 +13,7 @@ use App\Entity\Main\User;
 use App\Form\AccountFormType;
 use App\Form\UserRegisterType;
 use App\Service\CustomService;
+use App\Service\EncryptPasswordService;
 use App\Service\MyOwnServiceLocator;
 use App\Service\RandomNumberService;
 use App\Service\ThirdActionService;
@@ -83,7 +84,7 @@ class AppController extends AbstractController
      * @Route("/signup",name="signup_page")
      * @return Response
      */
-    public function signUp( Request  $request , ValidatorInterface  $validator)
+    public function signUp( Request  $request, EncryptPasswordService  $encryptPassword)
     {
         $form = $this->createForm(UserRegisterType::class);
 
@@ -92,10 +93,11 @@ class AppController extends AbstractController
         {
             try{
                 /**@var User $userData */
+
                 $userData = $form->getData();
-                $userData->setName('test ramy' )
-                    ->setTitle('Mr');
-                $errors = $validator->validate($userData);
+                $plainPassword = $form['plainPassword']->getData();
+
+                $userData->setPassword($encryptPassword->encryptPassword($plainPassword));
                 $userData->setActive(true);
                 $this->entityManager->persist($userData);
                 $this->entityManager->flush();

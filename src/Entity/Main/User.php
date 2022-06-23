@@ -43,6 +43,7 @@ class User
      */
     private $password;
 
+
     /**
      * @ORM\Column(type="string", length=255)
      */

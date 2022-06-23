@@ -27,7 +27,7 @@ class UserRegisterType extends AbstractType
     {
         $builder
             ->add('name',TextType::class,['help'=>'Введите имя'])
-            ->add('password',PasswordType::class,['help'=>'Your Strong Password'])
+            ->add('plainPassword',PasswordType::class,['help'=>'Your Strong Password','mapped'=> false,'label'=> 'your password'])
             ->add('email',TextType::class,['help'=>'Введите ваш email'])
             ->add('phone')
             ->add('title')
