@@ -175,6 +175,7 @@ class User
     public function setAddress(?Address $address): self
     {
         $this->address = $address;
+        $this->address->setUser($this);
 
         return $this;
     }
