@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,12 +33,7 @@ class UserRegisterType extends AbstractType
             ->add('phone')
             ->add('title')
             ->add('address',AddressType::class,['help'=>'your address','attr'=>['placeholder'=>'street, city, number']])
-            ->add('invited_by',EntityType::class,['class'=>User::class,'choices'=> $this->userRepository->findAllWithDbId(),
-                'choice_label'=>function(User $user){
-                return sprintf('%s -- %s',$user->getName(),$user->getDbid());
-            }
-
-                ,'help'=>'Введите имя пользователя, который пригласил вас'])
+            ->add('userPhoto',FileType::class,['help'=>'your avatar','mapped' => false])
             ->add('dateOfBirth',DateType::class,['years'=>range(1950,date('Y'))])
         ;
     }

@@ -96,6 +96,7 @@ class AppController extends AbstractController
 
                 $userData = $form->getData();
                 $plainPassword = $form['plainPassword']->getData();
+                $userPhoto = $form['userPhoto']->getData();
 
                 $userData->setPassword($encryptPassword->encryptPassword($plainPassword));
                 $userData->setActive(true);

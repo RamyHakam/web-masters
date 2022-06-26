@@ -119,6 +119,11 @@ class User
      */
     private $dbid;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $avatar;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -425,5 +430,17 @@ class User
                 ->atPath('name')
                 ->addViolation();
         }
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
     }
 }
