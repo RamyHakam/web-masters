@@ -66,7 +66,7 @@ class AppController extends AbstractController
             $data = $form->getData();
             $user = $data['email'];
         }
-        return $this->render('login.html.twig',['loginForm' => $form->createView()]);
+        return $this->render('login.html.twig',['form' => $form->createView()]);
     }
 
 
