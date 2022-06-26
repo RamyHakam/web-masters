@@ -17,6 +17,7 @@ use App\Service\EncryptPasswordService;
 use App\Service\MyOwnServiceLocator;
 use App\Service\RandomNumberService;
 use App\Service\ThirdActionService;
+use App\Service\UploadService;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Hakam\MultiTenancyBundle\Doctrine\ORM\TenantEntityManager;
@@ -85,7 +86,7 @@ class AppController extends AbstractController
      * @Route("/signup",name="signup_page")
      * @return Response
      */
-    public function signUp( Request  $request, EncryptPasswordService  $encryptPassword)
+    public function signUp( Request  $request, EncryptPasswordService  $encryptPassword, UploadService  $uploadService)
     {
         $form = $this->createForm(UserRegisterType::class);
 
@@ -99,12 +100,8 @@ class AppController extends AbstractController
                 $plainPassword = $form['plainPassword']->getData();
                 /** @var UploadedFile $userPhoto */
                 $userPhoto = $form['userPhoto']->getData();
-                $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
-                $originalName =pathinfo($userPhoto->getClientOriginalName(),PATHINFO_FILENAME);
-                $newName = $originalName.'_'.uniqid().'.'.$userPhoto->guessExtension();
-               $userPhoto->move($destination,$newName);
-               $userData->setAvatar($newName);
-
+                $avatarName = $uploadService->upload($userPhoto);
+               $userData->setAvatar($avatarName);
                 $userData->setPassword($encryptPassword->encryptPassword($plainPassword));
                 $userData->setActive(true);
                 $this->entityManager->persist($userData);
