@@ -21,7 +21,6 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-            - '../src/Tests/'
 
     App\Service\CommonInterface: '@App\Service\FirstService'
 
