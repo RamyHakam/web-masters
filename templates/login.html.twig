@@ -28,6 +28,9 @@
           </div>
         </div>
         <div class="card-body">
+          {% if error %}
+            <div class=" alert alert-danger">{{ error.messageKey }}</div>
+          {% endif %}
           {{ form_start(form) }}
             <div class="input-group form-group">
               <div class="input-group-prepend">

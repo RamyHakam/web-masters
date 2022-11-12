@@ -28,6 +28,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AppController extends AbstractController
@@ -57,7 +58,7 @@ class AppController extends AbstractController
      * @Route("/login",name="login_page")
      * @return Response
      */
-    public function login( Request  $request)
+    public function login( Request  $request,AuthenticationUtils  $authenticationUtils)
     {
         $form = $this->createForm(AccountFormType::class);
         $form->handleRequest($request);
@@ -66,7 +67,7 @@ class AppController extends AbstractController
             $data = $form->getData();
             $user = $data['email'];
         }
-        return $this->render('login.html.twig',['form' => $form->createView()]);
+        return $this->render('login.html.twig',['form' => $form->createView(),'error' => $authenticationUtils->getLastAuthenticationError()]);
     }
 
 
