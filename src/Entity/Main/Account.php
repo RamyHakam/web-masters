@@ -49,7 +49,7 @@ class Account implements UserInterface,PasswordAuthenticatedUserInterface
      */
     private string  $password;
 
-    private string $plainPassword;
+    private ?string $plainPassword;
 
     public function getId(): ?int
     {
