@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\CustomCredentials;
+use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
 class LoginFormAuthenticator extends AbstractAuthenticator
@@ -33,12 +34,10 @@ class LoginFormAuthenticator extends AbstractAuthenticator
     {
         $userName = $request->request->get('account_form')['username'];
         $password = $request->request->get('account_form')['password'];
-
         return new Passport(
             new UserBadge($userName),
-            new CustomCredentials(function ($credentials,Account  $account){
-              return  $credentials == '12345';
-            },$password) );
+            new PasswordCredentials($password),
+           );
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response

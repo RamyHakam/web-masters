@@ -4,12 +4,13 @@ namespace App\Entity\Main;
 
 use App\Repository\Main\AccountRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=AccountRepository::class)
  */
-class Account implements UserInterface
+class Account implements UserInterface,PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
@@ -42,6 +43,13 @@ class Account implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $phone;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string  $password;
+
+    private string $plainPassword;
 
     public function getId(): ?int
     {
@@ -104,7 +112,7 @@ class Account implements UserInterface
      */
     public function getPassword(): ?string
     {
-        return null;
+        return $this->password;
     }
 
     /**
@@ -122,8 +130,7 @@ class Account implements UserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getFirstName(): ?string
@@ -159,6 +166,31 @@ class Account implements UserInterface
     {
         $this->phone = $phone;
 
+        return $this;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     * @return Account
+     */
+    public function setPlainPassword(string $plainPassword): Account
+    {
+        $this->plainPassword = $plainPassword;
         return $this;
     }
 }
