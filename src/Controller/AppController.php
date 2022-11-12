@@ -396,4 +396,13 @@ class AppController extends AbstractController
 
                return  new Response('welcome to doctrine owning and inverse side!');
     }
+
+    /**
+     * @Route("/logout",name="/logout_page")
+     * @return Response
+     */
+    public function logout()
+    {
+        $test = 'test';
+    }
 }
