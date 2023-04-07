@@ -42,7 +42,7 @@ class LoginFormAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        return new RedirectResponse($this->router->generate('user_post',['id'=>$token->getUser()->getId()]));
+        return new RedirectResponse($this->router->generate('home_page'));
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
