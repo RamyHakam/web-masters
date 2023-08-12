@@ -18,9 +18,11 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\CustomCre
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class LoginFormAuthenticator extends AbstractAuthenticator implements  AuthenticationEntryPointInterface
 {
+    use TargetPathTrait;
     private RouterInterface $router;
 
     public function __construct(RouterInterface $router)
@@ -48,6 +50,8 @@ class LoginFormAuthenticator extends AbstractAuthenticator implements  Authentic
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        if($targetPath = $this->getTargetPath($request->getSession(), $firewallName))
+            return new RedirectResponse($targetPath);
         return new RedirectResponse($this->router->generate('home_page'));
     }
 
