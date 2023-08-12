@@ -34,7 +34,6 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_USER }
          - { path: ^/profile, roles: ROLE_USER }
-         - { path: ^/API, roles: ROLE_API_USER}
 
 when@test:
     security:
