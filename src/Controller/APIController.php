@@ -15,7 +15,7 @@ class APIController extends AbstractController
 {
     /**
      * @Route("/api/account",name="api")
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_ADMIN")
      * @return Response
      */
     public function api(): Response
