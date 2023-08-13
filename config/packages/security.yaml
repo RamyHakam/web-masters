@@ -19,10 +19,16 @@ security:
             remember_me:
                 secret: '%kernel.secret%'
             provider: app_user_provider
-            entry_point: App\Security\LoginFormAuthenticator
+            entry_point:  form_login
             custom_authenticator:
-                - App\Security\LoginFormAuthenticator
                 - App\Security\APIKeyAuthenticator
+            form_login:
+                login_path: login_page
+                check_path: login_page
+                username_parameter: account_form[username]
+                password_parameter: account_form[password]
+                csrf_parameter: account_form[_token]
+                default_target_path: home_page
             logout:
                 target: login_page
 
