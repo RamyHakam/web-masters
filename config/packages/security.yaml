@@ -16,6 +16,8 @@ security:
             security: false
         api:
             pattern: ^/api
+            custom_authenticator:
+                - App\Security\APIKeyAuthenticator
             entry_point: App\Security\APIEndpointHandler
             json_login:
                 check_path: api_login
@@ -26,8 +28,6 @@ security:
                 secret: '%kernel.secret%'
             provider: app_user_provider
             entry_point:  form_login
-            custom_authenticator:
-                - App\Security\APIKeyAuthenticator
             form_login:
                 login_path: login_page
                 check_path: login_page
