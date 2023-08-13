@@ -29,6 +29,8 @@ security:
                 password_parameter: account_form[password]
                 csrf_parameter: account_form[_token]
                 default_target_path: home_page
+            json_login:
+                check_path: api_login
             logout:
                 target: login_page
 

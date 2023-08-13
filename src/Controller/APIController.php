@@ -9,19 +9,29 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
-/**
- * @Security("is_granted('ROLE_USER') and user.getFirstName() === 'Ramy1' ")
- */
 class APIController extends AbstractController
 {
     /**
      * @Route("/api/account",name="api")
+     * @IsGranted("ROLE_USER")
      * @return Response
      */
     public function api(): Response
     {
         return new JsonResponse(['test'=>'account']);
+    }
+
+    /**
+     * @Route("/api/login",name="api_login")
+     * @IsGranted("ROLE_USER")
+     * @return Response
+     */
+    public function apiLogin(#[CurrentUser] $user): Response
+    {
+        $token = spl_object_hash($user);
+        return new JsonResponse(['token'=>$token]);
     }
 
     /**

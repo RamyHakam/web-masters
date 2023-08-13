@@ -411,6 +411,7 @@ class AppController extends AbstractController
 
     /**
      * @Route("/home",name="home_page")
+     ** @IsGranted("ROLE_USER")
      * @return Response
      */
     public function home(): Response
