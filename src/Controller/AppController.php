@@ -14,6 +14,7 @@ use App\Form\AccountFormType;
 use App\Form\UserRegisterType;
 use App\Service\CustomService;
 use App\Service\EncryptPasswordService;
+use App\Service\FirstActionService;
 use App\Service\MyOwnServiceLocator;
 use App\Service\RandomNumberService;
 use App\Service\ThirdActionService;
@@ -23,6 +24,7 @@ use Exception;
 use Hakam\MultiTenancyBundle\Doctrine\ORM\TenantEntityManager;
 use Hakam\MultiTenancyBundle\Event\SwitchDbEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -47,13 +49,16 @@ class AppController extends AbstractController
      */
     private $entityManager;
     private EventDispatcherInterface $dispatcher;
+    private LoggerInterface $logger;
 
-    public function __construct(MyOwnServiceLocator $serviceLocator,EntityManagerInterface  $entityManager,EventDispatcherInterface  $dispatcher)
+    public function __construct(MyOwnServiceLocator $serviceLocator,EntityManagerInterface  $entityManager,EventDispatcherInterface  $dispatcher,
+LoggerInterface  $logger)
     {
 
         $this->serviceLocator = $serviceLocator;
         $this->entityManager = $entityManager;
         $this->dispatcher = $dispatcher;
+        $this->logger = $logger;
     }
 
 
@@ -414,8 +419,10 @@ class AppController extends AbstractController
      ** @IsGranted("ROLE_USER")
      * @return Response
      */
-    public function home(): Response
+    public function home( FirstActionService $service): Response
     {
+        $service->logTheCurrentUser();
+        $this->logger->info('User has been logged in {user}', ['user' =>$this->getUser()->getUserIdentifier()]);
         return $this->render('home.html.twig');
     }
 

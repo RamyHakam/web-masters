@@ -195,4 +195,9 @@ class Account implements UserInterface,PasswordAuthenticatedUserInterface
         $this->plainPassword = $plainPassword;
         return $this;
     }
+
+    public function  getDisplayFullName(): string
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
 }
