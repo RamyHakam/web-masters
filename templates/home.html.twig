@@ -20,5 +20,21 @@
             </div>
         </div>
         {% endif %}
+
+        {% if is_granted('IS_AUTHENTICATED') %}
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ path('user_panel') }}"> User Dashboard</a>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ path('user_password_change') }}">change  User Password</a>
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
