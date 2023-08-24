@@ -51,6 +51,11 @@ class Account implements UserInterface,PasswordAuthenticatedUserInterface
      */
     private string  $password;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="account",fetch="EAGER")
+     */
+    private  $articles;
+
     private ?string $plainPassword;
 
     public function getId(): ?int
@@ -199,5 +204,23 @@ class Account implements UserInterface,PasswordAuthenticatedUserInterface
     public function  getDisplayFullName(): string
     {
         return $this->firstName . ' ' . $this->lastName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @param mixed $articles
+     * @return Account
+     */
+    public function setArticles($articles): static
+    {
+        $this->articles = $articles;
+        return $this;
     }
 }
