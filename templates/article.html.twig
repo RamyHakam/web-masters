@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">The List of Articles</h1>
+        <div class="row">
+            {% for article in articles %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if article.photo %}
+                            <img src="{{ article.photo }}" alt="Article Image" class="card-img-top">
+                        {% else %}
+                            <img src="path_to_default_image" alt="Default Image" class="card-img-top">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">Created at: {{ article.createdAt|date('Y-m-d H:i') }}</h5>
+                            <p class="card-text">Content: {{ article.content }}</p>
+                            <p class="card-text"><small class="text-muted">Likes: {{ article.likes }}</small></p>
+                            <!-- Action buttons -->
+                            <div class="mt-2">
+                                <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this article?')">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <p>No articles found for this account.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

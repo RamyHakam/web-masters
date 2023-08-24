@@ -57,7 +57,9 @@ final class AccountFactory extends ModelFactory
             ->afterInstantiate(function(Account $account): void {
                 $account->setPassword($this->passwordHasher->hashPassword($account, $account->getPlainPassword()));
             })
-        ;
+            ->afterPersist(function(Account $account): void {
+                ArticleFactory::new()->createMany(3, ['account' => $account]);
+            });
     }
 
     protected static function getClass(): string
