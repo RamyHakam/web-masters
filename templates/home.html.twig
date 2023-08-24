@@ -21,18 +21,18 @@
         </div>
         {% endif %}
 
-        {% if is_granted('IS_AUTHENTICATED') %}
+        {% if is_granted('ROLE_MEMBER') %}
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ path('user_panel') }}"> User Dashboard</a>
+                    <a href="{{ path('user_panel') }}"> MEMBER Dashboard</a>
                 </div>
             </div>
         {% endif %}
 
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
             <div class="row">
                 <div class="col-md-12">
-                    <a href="{{ path('user_password_change') }}">change  User Password</a>
+                    <a href="{{ path('user_password_change') }}">CTO Dashboard</a>
                 </div>
             </div>
         {% endif %}
