@@ -26,6 +26,9 @@ class ArticleController extends AbstractController
      */
     public function articles( ): Response
     {
+         if($this->isGranted('ROLE_ADMIN')){
+             return $this->render('article.html.twig',['account' => $this->getUser(),'articles' => $this->entityManager->getRepository(Article::class)->findAll()]);
+         }
         return $this->render('article.html.twig',['account' => $this->getUser(),'articles' => $this->getUser()->getArticles()]);
     }
 
@@ -34,6 +37,7 @@ class ArticleController extends AbstractController
      */
     public function edit(Request $request, Article $article): Response
     {
+        $this->denyAccessUnlessGranted('EDIT', $article);
         if ($request->isMethod('POST')) {
             $article->setPhoto($request->request->get('photo'));
             $article->setContent($request->request->get('content'));
@@ -54,6 +58,7 @@ class ArticleController extends AbstractController
      */
     public function delete(Request $request, Article $article): Response
     {
+        $this->denyAccessUnlessGranted('DELETE', $article);
         if ($request->isMethod('POST')) {
 
             $this->entityManager->remove($article);

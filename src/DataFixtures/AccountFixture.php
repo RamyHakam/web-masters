@@ -12,11 +12,15 @@ class AccountFixture extends  Fixture
     public function load(ObjectManager $manager)
     {
         $account = AccountFactory::createOne([
-            'email' => 'test@test.com','roles' => ['ROLE_ADMIN']]);
+            'email' => 'admin@test.com','roles' => ['ROLE_ADMIN']]);
         ArticleFactory::new()->createMany(10, ['account' => $account]);
 
         $account2 = AccountFactory::createOne([
-            'email' => 'test2@test.com']);
+            'email' => 'user@test.com']);
+        ArticleFactory::new()->createMany(10, ['account' => $account2]);
+
+        $account3 = AccountFactory::createOne([
+            'email' => 'super@test.com','roles' => ['ROLE_SUPER_ADMIN']]);
         ArticleFactory::new()->createMany(10, ['account' => $account2]);
 
         AccountFactory::createMany(30);

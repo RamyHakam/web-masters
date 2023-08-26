@@ -2,9 +2,7 @@
 
 namespace App\Factory;
 
-use App\Entity\Main\Account;
 use App\Entity\Main\Article;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\ModelFactory;
 
 final class ArticleFactory extends ModelFactory
