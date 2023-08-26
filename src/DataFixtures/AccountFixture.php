@@ -16,7 +16,7 @@ class AccountFixture extends  Fixture
         ArticleFactory::new()->createMany(10, ['account' => $account]);
 
         $account2 = AccountFactory::createOne([
-            'email' => 'user@test.com']);
+            'email' => 'user@test.com','isBlocked' => true]);
         ArticleFactory::new()->createMany(10, ['account' => $account2]);
 
         $account3 = AccountFactory::createOne([

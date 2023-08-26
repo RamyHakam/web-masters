@@ -52,6 +52,11 @@ class Account implements UserInterface,PasswordAuthenticatedUserInterface
     private string  $password;
 
     /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private bool  $isBlocked =  false;
+
+    /**
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="account",fetch="EAGER")
      */
     private  $articles;
@@ -221,6 +226,24 @@ class Account implements UserInterface,PasswordAuthenticatedUserInterface
     public function setArticles($articles): static
     {
         $this->articles = $articles;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBlocked(): bool
+    {
+        return $this->isBlocked;
+    }
+
+    /**
+     * @param bool $isBlocked
+     * @return Account
+     */
+    public function setIsBlocked(bool $isBlocked): Account
+    {
+        $this->isBlocked = $isBlocked;
         return $this;
     }
 }

@@ -47,6 +47,7 @@ final class AccountFactory extends ModelFactory
             'lastName' => self::faker()->lastName,
             'phone' => self::faker()->phoneNumber,
             'plainPassword' => 'test',
+            'isBlocked' => false,
         ];
     }
 
