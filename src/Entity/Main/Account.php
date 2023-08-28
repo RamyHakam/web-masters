@@ -5,6 +5,7 @@ namespace App\Entity\Main;
 use App\Repository\Main\AccountRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -12,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass=AccountRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Account implements UserInterface,PasswordAuthenticatedUserInterface
+class Account implements UserInterface,PasswordAuthenticatedUserInterface, EquatableInterface
 {
     /**
      * @ORM\Id
@@ -245,5 +246,10 @@ class Account implements UserInterface,PasswordAuthenticatedUserInterface
     {
         $this->isBlocked = $isBlocked;
         return $this;
+    }
+
+    public function isEqualTo(UserInterface $user): bool
+    {
+        return $this->firstName === $user->getFirstName() && $this->lastName === $user->getLastName();
     }
 }
